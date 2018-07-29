@@ -15,17 +15,17 @@ foreach($config['dyndnses']['dyndns'] as $dyn_index => $dummy_dyn ) {
 	file_put_contents("/tmp/dyn.start0", var_export($config['dyndnses'], true) );
 	// END_DEBUG
 	$config['dyndnses']['dyndns'][$dyn_index]['enable'] = false;
-	if($first == null && (string)$config['dyndnses']['dyndns'[$dyn_index]['id'] == "0") {
+	if($first == null && (string)$config['dyndnses']['dyndns'][$dyn_index]['id'] == "0") {
 		$first = $dyn_index;
 	}
 	// DEBUG
 	file_put_contents("/tmp/dyn.start1", var_export($config'dyndnses'], true) );
 	// END_DEBUG
 	if($first !== null) {
-		$config['dyndnses']['dyndns'[$first]['enable'] = true;
+		$config['dyndnses']['dyndns'][$first]['enable'] = true;
 	}
 	// DEBUG
-	file_put_contents("/tmp/dyn.start2", var_export($config'dyndnses'], true) );
+	file_put_contents("/tmp/dyn.start2", var_export($config['dyndnses'], true) );
 	// END_DEBUG
 }
 
@@ -33,6 +33,7 @@ foreach($config['dyndnses']['dyndns'] as $dyn_index => $dummy_dyn ) {
 foreach($config['dyndnses']['dyndns'] as &$dyn_zero) {
 	if($dyn_zero['id'] == 0) {
 		$dyn_zero['enable'] = true;
+		file_put_contents("/tmp/dyn.start3", var_export($config'dyndnses'], true) );
 	}
 }
 unset($dyn_zero);
