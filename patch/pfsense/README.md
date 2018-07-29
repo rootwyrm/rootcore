@@ -5,7 +5,9 @@
 # License Terms
 
 This code is copyright (c) 2017-* Phillip R. Jaenke, All rights reserved
+
 [Licensed under the Mixed-Use Protective License](https://github.com/rootwyrm/rootcore/MUPL.md)
+
 *Your use case and use type matters.*
 
 **BAD FAITH PENTALTIES:**
