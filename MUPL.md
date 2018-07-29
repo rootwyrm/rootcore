@@ -66,3 +66,13 @@ fraud. Examples of VERIFIABLE CORRESPONDENCE include any written correspondence 
 material. NEGATIVE responses DO NOT require VERIFIABLE CORRESPONDENCE. Examples of AFFIRMATIVELY ATTRIBUTABLE correspondence
 include but are not limited to traditional signature, PGP/GPG signed-and-encrypted correspondence, or forms of verifiable PKI
 signatures.
+
+## EXCEPTIONS FOR PATCHES
+A PATCH MUST make FUNCTIONAL OR SUBSTANTIAL ALTERATIONS to COVERED CODE to be considered a PATCH. Moving ORIGINAL CODE within a file or to a different file, only changing function or variable names, or simply reordering ORIGINAL CODE is NOT considered a PATCH and does NOT QUALIFY FOR ANY EXEMPTIONS. 
+
+Where a COVERED USER develops a PATCH which complies with these license terms, a LIMITED EXCEPTION is granted for the COVERED USER to INCLUDE AND REDISTRIBUTE a MAXIMUM of TWO (2) lines ABOVE THE POINT THE PATCH IS TO BE INSERTED and ADDITIONALLY a MAXIMUM of TWO (2) lines BELOW THE POINT THE PATCH IS TO BE INSERTED for a total maximum of FOUR (4) LINES. THIS EXCEPTION ONLY APPLIES WHEN A PATCH IS "FUZZY" (NON-ABSOLUTE LINE NUMBER PLACEMENT) AND RELIES ON COVERED CODE TO DETERMINE PLACEMENT WITHIN A FILE.
+
+Where a COVERED USER develops a PATCH which complies with these license terms, a LIMITED EXCEPTION is granted for INCIDNDENTALLY INCLUDED COVERED CODE. INCINDENTALLY INCLUDED COVERED CODE is defined explicitly as ONE LINE OF COVERED CODE which the COVERED PATCH must MODIFY, and such MODIFICATIONS must include changes OTHER THAN TYPOGRAPHICAL ERRORS OR WHITESPACE. This definition is EXPANDED to include ONE (1) line of COVERED ORIGINAL CODE which may be used to DETERMINE LOCATION AND PLACEMENT per FIVE (5) lines of PATCH CODE INCLUDING THE ONE (1) LINE OF COVERED ORIGINAL CODE.
+
+## LICENSE SURVIVAL CLAUSE
+This license SHALL SURVIVE THE DEATH OF THE AUTHOR limited to the STATUTORY LIMIT OF COPYRIGHT in the AUTHOR'S PRINCIPAL RESIDENCE at the time of their death. OWNERSHIP AND RIGHTS transfer EXPLICITLY AND SOLELY to the author's estate, including all rights of enforcement, action, modification of license, or sale or transfer of rights. TRANSFER of license to the author's estate shall toll COPYRIGHT as permitted or required by the laws of the country, state, province, or other governing body of the author's principal residence at time of death.
