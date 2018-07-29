@@ -5,9 +5,8 @@ The author retains ALL RIGHTS to the licensed material at ALL TIMES and offers N
 SUITABILITY OF USE IN ANY FORM OR FUNCTION. The author DISCLAIMS ALL RESPONSIBILITY for ANY AND ALL HARMS WHICH MAY OCCUR EITHER
 DIRECTLY OR INDIRECTLY FROM THE USE OF THIS CODE, WHETHER FORESEEABLE OR UNKNOWN. Use of this code is AT YOUR OWN RISK at ALL
 TIMES.
-This license MAY BE INCLUDED AS THOUGH WRITTEN OUT IN FULL by including the first two paragraphs and an EXPLICIT, WORKING
-LINK OR REFERENCE to a COMPLETE WRITTEN COPY of this license, provided that the WORKING LINK OR REFERENCE is included with OR 
-A COMPLETE COPY is available within the distributed code.
+
+This license MAY BE INCLUDED AS THOUGH WRITTEN OUT IN FULL by explicitly referencing this license and including and an EXPLICIT, WORKING LINK OR REFERENCE to a COMPLETE WRITTEN COPY of this license, provided that the WORKING LINK OR REFERENCE functions AND A COMPLETE COPY is available within the distributed code either inline or as a separate file.
 
 If you are a PERSONAL user who is not using this code to conduct business including providing services, selling products,
 or operating a business, then:
@@ -18,9 +17,9 @@ or operating a business, then:
   * Patches MUST NOT change the license of the licensed material which they apply to
   * Patches MUST INCLUDE a clear statement that they apply to code covered by this license
   * Patches MUST INCLUDE a link to this license even if patches do not use this license
-* You MAY NOT redistribute this code in modified or unmodified form without written permission
+* You MAY NOT redistribute this code in modified or unmodified form without express written consent
 * You MAY NOT charge for the use of this code
-* You MAY NOT charge for assistance in implementing the licensed code without written permission
+* You MAY NOT charge for assistance in implementing the licensed code without express written consent
 
 COMMERCIAL and BUSINESS users are defined as entities which are using this code for ANY commercial activity, including but
 not limited to operating a business, providing services, providing software, or selling products.
@@ -51,6 +50,7 @@ receives no response in the affirmative OR negative within 365 calendar days (1 
 CONSENT THROUGH NEGLECT which shall be considered the same as EXPRESS WRITTEN CONSENT. A COVERED USER which has obtained CONSENT
 THROUGH NEGLECT is indemnified from any claims of copyright infringement by the author and is entitled to use this license as
 an affirmative defense in any claims.
+
 In the event where CONSENT THROUGH NEGLECT was obtained through BAD FAITH means including but not limited to using unmonitored
 email addresses, bogus postal addresses, refusal of delivery, or any other means which through neglect or deliberate actions the
 author's response is caused to not be received, the COVERED USER shall be subject to appropriate civil action in jurisdiction
