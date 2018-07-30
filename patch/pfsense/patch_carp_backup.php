@@ -33,5 +33,4 @@ foreach($config['dyndnses']['dyndns'] as $dyn_index => $dummy_dyn ) {
 file_put_contents("/tmp/dyn.stop1", var_export($config['dyndnses'], true) );
 // END_DEBUG
 
-wc_msg = gettext('CARP triggered DynDNS disable.');
-write_config($wc_msg);
+write_config("CARP triggered DynDNS disable.");
