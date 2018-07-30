@@ -31,8 +31,7 @@ file_put_contents("/tmp/dyn.start1", var_export($config['dyndnses'], true) );
 // END_DEBUG
 
 // Write config before forcing update
-wc_msg = gettext('CARP triggered DynDNS enable.');
-write_config($wc_msg);
+write_config("CARP triggered DynDNS enable.");
 
 // Force update.
 shell_exec("/etc/rc.dyndns.update");
