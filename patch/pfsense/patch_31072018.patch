@@ -1,76 +1,5 @@
---- MUPL.md	1969-12-31 19:00:00.000000000 -0500
-+++ ../../MUPL.md	2018-07-29 14:58:14.179160000 -0400
-@@ -0,0 +1,68 @@
-+Mixed-Use Protective License 1.0
-+Your use case and use type matters! READ CAREFULLY!
-+
-+The author retains ALL RIGHTS to the licensed material at ALL TIMES and offers NO WARRANTIES EXPRESSED OR IMPLIED AS TO THE
-+SUITABILITY OF USE IN ANY FORM OR FUNCTION. The author DISCLAIMS ALL RESPONSIBILITY for ANY AND ALL HARMS WHICH MAY OCCUR EITHER
-+DIRECTLY OR INDIRECTLY FROM THE USE OF THIS CODE, WHETHER FORESEEABLE OR UNKNOWN. Use of this code is AT YOUR OWN RISK at ALL
-+TIMES.
-+This license MAY BE INCLUDED AS THOUGH WRITTEN OUT IN FULL by including the first two paragraphs and an EXPLICIT, WORKING
-+LINK OR REFERENCE to a COMPLETE WRITTEN COPY of this license, provided that the WORKING LINK OR REFERENCE is included with OR 
-+A COMPLETE COPY is available within the distributed code.
-+
-+If you are a PERSONAL user who is not using this code to conduct business including providing services, selling products,
-+or operating a business, then:
-+* You ARE allowed to freely copy and use this code without modifications
-+* You ARE allowed to modify this code for your personal use
-+* You ARE allowed to create and distribute patches to this code
-+  * Patches MUST NOT include the code covered by this license but may apply to it
-+  * Patches MUST NOT change the license of the licensed material which they apply to
-+  * Patches MUST INCLUDE a clear statement that they apply to code covered by this license
-+  * Patches MUST INCLUDE a link to this license even if patches do not use this license
-+* You MAY NOT redistribute this code in modified or unmodified form without written permission
-+* You MAY NOT charge for the use of this code
-+* You MAY NOT charge for assistance in implementing the licensed code without written permission
-+
-+COMMERCIAL and BUSINESS users are defined as entities which are using this code for ANY commercial activity, including but
-+not limited to operating a business, providing services, providing software, or selling products.
-+If you are a COMMERCIAL or BUSINESS user then you may use the code as follows:
-+* You ARE allowed to utilize the licensed code in unmodified state within your business
-+* You ARE allowed to copy and distribute the licensed code within your business
-+  * EXCEPT WHEN: the licensed code is provided to customers either as part of services, software, or products
-+  * EXCEPT WHEN: the licensed code is used as the basis for a specific offering or product
-+  * EXCEPT WHEN: there is any exchange of goods or services for using the licensed code
-+  * YOU ARE PERMITED WHEN: the offering or product is only for internal use (e.g. chargeback)
-+* You ARE allowed to modify this code for use within the business
-+  * EXCEPT WHEN: modified code is provided to customers either as part of services, software, or products
-+  * EXCEPT WHEN: modified code is used to provide specific services or products to customers
-+* You MAY NOT redistribute the licensed code in modified or unmodified form without the express written consent of the author
-+* You MAY NOT include the licensed code in any project, product, or service without express written consent from the author
-+* You MAY NOT include the licensed code in any open source project, product, or service without express written consent from 
-+  the author REGARDLESS of any associated, linked, implied, or inferred licenses
-+* You MAY NOT integrate the licensed code in any fashion into any project, product, or service without express written consent 
-+  from the author
-+* You MAY NOT create or distribute any patches which modify the licensed code under any license without express written consent
-+  from the author
-+
-+The author is FULLY RESPONSIBLE for providing a valid means to contact them to obtain EXPRESS WRITTEN CONSENT. Valid means is 
-+defined as any reasonably visible contact method including but not limited to a working email address, telephone number, or
-+postal address. It is the responsibility of the USER to make reasonable attempts to contact the author at ALL listed contact 
-+methods. If a COVERED USER makes documented and verifiable attempts to contact the author at all provided contact points, and 
-+receives no response in the affirmative OR negative within 365 calendar days (1 calendar year,) the COVERED USER is granted 
-+CONSENT THROUGH NEGLECT which shall be considered the same as EXPRESS WRITTEN CONSENT. A COVERED USER which has obtained CONSENT
-+THROUGH NEGLECT is indemnified from any claims of copyright infringement by the author and is entitled to use this license as
-+an affirmative defense in any claims.
-+In the event where CONSENT THROUGH NEGLECT was obtained through BAD FAITH means including but not limited to using unmonitored
-+email addresses, bogus postal addresses, refusal of delivery, or any other means which through neglect or deliberate actions the
-+author's response is caused to not be received, the COVERED USER shall be subject to appropriate civil action in jurisdiction
-+CONVENIENT TO THE AUTHOR and shall be subject to and liable TO THE AUTHOR for:
-+- All costs of court proceedings and legal actions brought by the author except where such terms are prohibited by law
-+- Any damages EXPLICITLY defined by the author as "Bad Faith" penalties when including this license
-+- Payment to the author of ALL PROCEEDS AND PROFITS which were obtained from the use of the covered code
-+- Any and all other damages as determined by the court or other deliberative body
-+
-+EXPRESS WRITTEN CONSENT as used in this license is defined explicitly as VERIFIABLE CORRESPONDENCE from the author.
-+VERIFIABLE is defined as an item which is AFFIRMATIVELY ATTRIBUTABLE to the author and REASONABLY RESISTANT to forgery or
-+fraud. Examples of VERIFIABLE CORRESPONDENCE include any written correspondence which explicitly identifies the licensed
-+material. NEGATIVE responses DO NOT require VERIFIABLE CORRESPONDENCE. Examples of AFFIRMATIVELY ATTRIBUTABLE correspondence
-+include but are not limited to traditional signature, PGP/GPG signed-and-encrypted correspondence, or forms of verifiable PKI
-+signatures.
---- etc/rc.carpbackup.orig	2018-07-31 00:37:05.239839000 -0400
-+++ etc/rc.carpbackup	2018-07-31 00:37:22.597114000 -0400
+--- etc/rc.carpbackup.orig	2018-07-31 02:12:02.963348000 -0400
++++ etc/rc.carpbackup	2018-07-31 02:12:13.295410000 -0400
 @@ -120,0 +121,39 @@ if (isset($config['dhcpdv6']) && is_arra
 +/**************************************************************************
 + patch_carp_master.php
@@ -111,8 +40,8 @@
 +
 +write_config("CARP triggered DynDNS disable.");
 +
---- etc/rc.carpmaster.orig	2018-07-31 00:37:05.240325000 -0400
-+++ etc/rc.carpmaster	2018-07-31 00:37:41.817099000 -0400
+--- etc/rc.carpmaster.orig	2018-07-31 02:12:02.963802000 -0400
++++ etc/rc.carpmaster	2018-07-31 02:12:25.426339000 -0400
 @@ -119,0 +120,44 @@ if (isset($config['dhcpdv6']) && is_arra
 +/**************************************************************************
 + patch_carp_master.php
@@ -159,8 +88,8 @@
 +shell_exec("/etc/rc.dyndns.update");
 +
 --- MUPL.md	1969-12-31 19:00:00.000000000 -0500
-+++ ../../MUPL.md	2018-07-29 14:58:14.179160000 -0400
-@@ -0,0 +1,68 @@
++++ ../../MUPL.md	2018-07-31 00:39:26.663398000 -0400
+@@ -0,0 +1,78 @@
 +Mixed-Use Protective License 1.0
 +Your use case and use type matters! READ CAREFULLY!
 +
@@ -168,9 +97,8 @@
 +SUITABILITY OF USE IN ANY FORM OR FUNCTION. The author DISCLAIMS ALL RESPONSIBILITY for ANY AND ALL HARMS WHICH MAY OCCUR EITHER
 +DIRECTLY OR INDIRECTLY FROM THE USE OF THIS CODE, WHETHER FORESEEABLE OR UNKNOWN. Use of this code is AT YOUR OWN RISK at ALL
 +TIMES.
-+This license MAY BE INCLUDED AS THOUGH WRITTEN OUT IN FULL by including the first two paragraphs and an EXPLICIT, WORKING
-+LINK OR REFERENCE to a COMPLETE WRITTEN COPY of this license, provided that the WORKING LINK OR REFERENCE is included with OR 
-+A COMPLETE COPY is available within the distributed code.
++
++This license MAY BE INCLUDED AS THOUGH WRITTEN OUT IN FULL by explicitly referencing this license and including and an EXPLICIT, WORKING LINK OR REFERENCE to a COMPLETE WRITTEN COPY of this license, provided that the WORKING LINK OR REFERENCE functions AND A COMPLETE COPY is available within the distributed code either inline or as a separate file.
 +
 +If you are a PERSONAL user who is not using this code to conduct business including providing services, selling products,
 +or operating a business, then:
@@ -181,9 +109,9 @@
 +  * Patches MUST NOT change the license of the licensed material which they apply to
 +  * Patches MUST INCLUDE a clear statement that they apply to code covered by this license
 +  * Patches MUST INCLUDE a link to this license even if patches do not use this license
-+* You MAY NOT redistribute this code in modified or unmodified form without written permission
++* You MAY NOT redistribute this code in modified or unmodified form without express written consent
 +* You MAY NOT charge for the use of this code
-+* You MAY NOT charge for assistance in implementing the licensed code without written permission
++* You MAY NOT charge for assistance in implementing the licensed code without express written consent
 +
 +COMMERCIAL and BUSINESS users are defined as entities which are using this code for ANY commercial activity, including but
 +not limited to operating a business, providing services, providing software, or selling products.
@@ -214,6 +142,7 @@
 +CONSENT THROUGH NEGLECT which shall be considered the same as EXPRESS WRITTEN CONSENT. A COVERED USER which has obtained CONSENT
 +THROUGH NEGLECT is indemnified from any claims of copyright infringement by the author and is entitled to use this license as
 +an affirmative defense in any claims.
++
 +In the event where CONSENT THROUGH NEGLECT was obtained through BAD FAITH means including but not limited to using unmonitored
 +email addresses, bogus postal addresses, refusal of delivery, or any other means which through neglect or deliberate actions the
 +author's response is caused to not be received, the COVERED USER shall be subject to appropriate civil action in jurisdiction
@@ -229,92 +158,13 @@
 +material. NEGATIVE responses DO NOT require VERIFIABLE CORRESPONDENCE. Examples of AFFIRMATIVELY ATTRIBUTABLE correspondence
 +include but are not limited to traditional signature, PGP/GPG signed-and-encrypted correspondence, or forms of verifiable PKI
 +signatures.
---- etc/rc.carpbackup.orig	2018-07-31 02:09:25.177942000 -0400
-+++ etc/rc.carpbackup	2018-07-31 02:09:44.836288000 -0400
-@@ -120,0 +121,39 @@ if (isset($config['dhcpdv6']) && is_arra
-+/**************************************************************************
-+ patch_carp_master.php
-+ Copyright (C) 2018-* Phillip R. Jaenke <prj+patchdev@rootwyrm.com>
-+ All rights reserved.
 +
-+ This code is licensed under the Mixed-Use Protective License
-+ http://github.com/rootwyrm/rootcore/MUPL.md
-+ BAD FAITH PENALTIES:
-+ - $50,000.00 USD minimum for unauthorized inclusion or distribution
-+ - $1.00 USD per unauthorized commercial sale, minimum $25,000.00 USD
-+**************************************************************************/
-+// DEBUG - dump the source array before we fuck with it
-+file_put_contents("/tmp/dyn.stop0", var_export($config['dyndnses'], true) );
-+// END_DEBUG
-+// filter out bad items before we proccess
-+$config['dyndnses']['dyndns'] = array_filter($config['dyndnses']['dyndns']);
-+foreach($config['dyndnses']['dyndns'] as $dyn_index => $dummy_dyn ) {
-+	// force all enables to null (disabled)
-+	$config['dyndnses']['dyndns'][$dyn_index]['enable'] = null;
-+	// Turn on ID = 0 (first entry)
-+	if( (string)$config['dyndnses']['dyndns'][$dyn_index]['id'] === "0" ) {
-+		file_put_contents("/tmp/dyn.stop0a", var_export($config['dyndnses'], true) );	
-+		$config['dyndnses']['dyndns'][$dyn_index]['enable'] = true;
-+		$config['dyndnses']['dyndns'][$dyn_index]['force'] = true;
-+		file_put_contents("/tmp/dyn.stop0b", var_export($config['dyndnses'], true) );	
-+	}
-+	// Unset enable for all non-ID 0 entries
-+	if( (string)$config['dyndnses']['dyndns'][$dyn_index]['id'] > "0") {
-+		file_put_contents("/tmp/dyn.stop1a", var_export($config['dyndnses'], true) );	
-+		unset($config['dyndnses']['dyndns'][$dyn_index]['enable']); 
-+		file_put_contents("/tmp/dyn.stop1b", var_export($config['dyndnses'], true) );	
-+	}
-+}
-+// DEBUG - write out the array after we've changed the enables
-+file_put_contents("/tmp/dyn.stop1", var_export($config['dyndnses'], true) );
-+// END_DEBUG
++## EXCEPTIONS FOR PATCHES
++A PATCH MUST make FUNCTIONAL OR SUBSTANTIAL ALTERATIONS to COVERED CODE to be considered a PATCH. Moving ORIGINAL CODE within a file or to a different file, only changing function or variable names, or simply reordering ORIGINAL CODE is NOT considered a PATCH and does NOT QUALIFY FOR ANY EXEMPTIONS. 
 +
-+write_config("CARP triggered DynDNS disable.");
++Where a COVERED USER develops a PATCH which complies with these license terms, a LIMITED EXCEPTION is granted for the COVERED USER to INCLUDE AND REDISTRIBUTE a MAXIMUM of TWO (2) lines ABOVE THE POINT THE PATCH IS TO BE INSERTED and ADDITIONALLY a MAXIMUM of TWO (2) lines BELOW THE POINT THE PATCH IS TO BE INSERTED for a total maximum of FOUR (4) LINES. THIS EXCEPTION ONLY APPLIES WHEN A PATCH IS "FUZZY" (NON-ABSOLUTE LINE NUMBER PLACEMENT) AND RELIES ON COVERED CODE TO DETERMINE PLACEMENT WITHIN A FILE.
 +
---- etc/rc.carpmaster.orig	2018-07-31 02:09:25.178454000 -0400
-+++ etc/rc.carpmaster	2018-07-31 02:10:00.157807000 -0400
-@@ -119,0 +120,44 @@ if (isset($config['dhcpdv6']) && is_arra
-+/**************************************************************************
-+ patch_carp_master.php
-+ Copyright (C) 2018-* Phillip R. Jaenke <prj+patchdev@rootwyrm.com>
-+ All rights reserved.
++Where a COVERED USER develops a PATCH which complies with these license terms, a LIMITED EXCEPTION is granted for INCIDNDENTALLY INCLUDED COVERED CODE. INCINDENTALLY INCLUDED COVERED CODE is defined explicitly as ONE LINE OF COVERED CODE which the COVERED PATCH must MODIFY, and such MODIFICATIONS must include changes OTHER THAN TYPOGRAPHICAL ERRORS OR WHITESPACE. This definition is EXPANDED to include ONE (1) line of COVERED ORIGINAL CODE which may be used to DETERMINE LOCATION AND PLACEMENT per FIVE (5) lines of PATCH CODE INCLUDING THE ONE (1) LINE OF COVERED ORIGINAL CODE.
 +
-+ This code is licensed under the Mixed-Use Protective License
-+ http://github.com/rootwyrm/rootcore/MUPL.md
-+ BAD FAITH PENALTIES:
-+ - $50,000.00 USD minimum for unauthorized inclusion or distribution
-+ - $1.00 USD per unauthorized commercial sale, minimum $25,000.00 USD
-+**************************************************************************/
-+// DEBUG - dump the source array before we fuck with it
-+file_put_contents("/tmp/dyn.start0", var_export($config['dyndnses'], true) );
-+// END_DEBUG
-+// filter out bad items before we proccess
-+$config['dyndnses']['dyndns'] = array_filter($config['dyndnses']['dyndns']);
-+foreach($config['dyndnses']['dyndns'] as $dyn_index => $dummy_dyn ) {
-+	// force all enables to null (disabled)
-+	$config['dyndnses']['dyndns'][$dyn_index]['enable'] = null;
-+	// Turn on ID = 0 (first entry)
-+	if( (string)$config['dyndnses']['dyndns'][$dyn_index]['id'] === "0" ) {
-+		file_put_contents("/tmp/dyn.start0a", var_export($config['dyndnses'], true) );
-+		$config['dyndnses']['dyndns'][$dyn_index]['enable'] = true;
-+		$config['dyndnses']['dyndns'][$dyn_index]['force'] = true;
-+		file_put_contents("/tmp/dyn.start0b", var_export($config['dyndnses'], true) );
-+	}
-+	// Switched DynDNS entries are all above ID 0
-+	if( (string)$config['dyndnses']['dyndns'][$dyn_index]['id'] > "0") {
-+		file_put_contents("/tmp/dyn.start1a", var_export($config['dyndnses'], true) );
-+		$config['dyndnses']['dyndns'][$dyn_index]['enable'] = true;
-+		$config['dyndnses']['dyndns'][$dyn_index]['force'] = true;
-+		file_put_contents("/tmp/dyn.start1b", var_export($config['dyndnses'], true) );
-+	}
-+}
-+// DEBUG - write out the array after we've changed the enables
-+file_put_contents("/tmp/dyn.start1", var_export($config['dyndnses'], true) );
-+// END_DEBUG
-+
-+// Write config before forcing update
-+write_config("CARP triggered DynDNS enable.");
-+
-+// Force update.
-+shell_exec("/etc/rc.dyndns.update");
-+
++## LICENSE SURVIVAL CLAUSE
++This license SHALL SURVIVE THE DEATH OF THE AUTHOR limited to the STATUTORY LIMIT OF COPYRIGHT in the AUTHOR'S PRINCIPAL RESIDENCE at the time of their death. OWNERSHIP AND RIGHTS transfer EXPLICITLY AND SOLELY to the author's estate, including all rights of enforcement, action, modification of license, or sale or transfer of rights. TRANSFER of license to the author's estate shall toll COPYRIGHT as permitted or required by the laws of the country, state, province, or other governing body of the author's principal residence at time of death.
