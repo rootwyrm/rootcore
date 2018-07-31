@@ -5,9 +5,8 @@ The author retains ALL RIGHTS to the licensed material at ALL TIMES and offers N
 SUITABILITY OF USE IN ANY FORM OR FUNCTION. The author DISCLAIMS ALL RESPONSIBILITY for ANY AND ALL HARMS WHICH MAY OCCUR EITHER
 DIRECTLY OR INDIRECTLY FROM THE USE OF THIS CODE, WHETHER FORESEEABLE OR UNKNOWN. Use of this code is AT YOUR OWN RISK at ALL
 TIMES.
-This license MAY BE INCLUDED AS THOUGH WRITTEN OUT IN FULL by including the first two paragraphs and an EXPLICIT, WORKING
-LINK OR REFERENCE to a COMPLETE WRITTEN COPY of this license, provided that the WORKING LINK OR REFERENCE is included with OR 
-A COMPLETE COPY is available within the distributed code.
+
+This license MAY BE INCLUDED AS THOUGH WRITTEN OUT IN FULL by explicitly referencing this license and including and an EXPLICIT, WORKING LINK OR REFERENCE to a COMPLETE WRITTEN COPY of this license, provided that the WORKING LINK OR REFERENCE functions AND A COMPLETE COPY is available within the distributed code either inline or as a separate file.
 
 If you are a PERSONAL user who is not using this code to conduct business including providing services, selling products,
 or operating a business, then:
@@ -18,9 +17,9 @@ or operating a business, then:
   * Patches MUST NOT change the license of the licensed material which they apply to
   * Patches MUST INCLUDE a clear statement that they apply to code covered by this license
   * Patches MUST INCLUDE a link to this license even if patches do not use this license
-* You MAY NOT redistribute this code in modified or unmodified form without written permission
+* You MAY NOT redistribute this code in modified or unmodified form without express written consent
 * You MAY NOT charge for the use of this code
-* You MAY NOT charge for assistance in implementing the licensed code without written permission
+* You MAY NOT charge for assistance in implementing the licensed code without express written consent
 
 COMMERCIAL and BUSINESS users are defined as entities which are using this code for ANY commercial activity, including but
 not limited to operating a business, providing services, providing software, or selling products.
@@ -51,6 +50,7 @@ receives no response in the affirmative OR negative within 365 calendar days (1 
 CONSENT THROUGH NEGLECT which shall be considered the same as EXPRESS WRITTEN CONSENT. A COVERED USER which has obtained CONSENT
 THROUGH NEGLECT is indemnified from any claims of copyright infringement by the author and is entitled to use this license as
 an affirmative defense in any claims.
+
 In the event where CONSENT THROUGH NEGLECT was obtained through BAD FAITH means including but not limited to using unmonitored
 email addresses, bogus postal addresses, refusal of delivery, or any other means which through neglect or deliberate actions the
 author's response is caused to not be received, the COVERED USER shall be subject to appropriate civil action in jurisdiction
@@ -66,3 +66,13 @@ fraud. Examples of VERIFIABLE CORRESPONDENCE include any written correspondence 
 material. NEGATIVE responses DO NOT require VERIFIABLE CORRESPONDENCE. Examples of AFFIRMATIVELY ATTRIBUTABLE correspondence
 include but are not limited to traditional signature, PGP/GPG signed-and-encrypted correspondence, or forms of verifiable PKI
 signatures.
+
+## EXCEPTIONS FOR PATCHES
+A PATCH MUST make FUNCTIONAL OR SUBSTANTIAL ALTERATIONS to COVERED CODE to be considered a PATCH. Moving ORIGINAL CODE within a file or to a different file, only changing function or variable names, or simply reordering ORIGINAL CODE is NOT considered a PATCH and does NOT QUALIFY FOR ANY EXEMPTIONS. 
+
+Where a COVERED USER develops a PATCH which complies with these license terms, a LIMITED EXCEPTION is granted for the COVERED USER to INCLUDE AND REDISTRIBUTE a MAXIMUM of TWO (2) lines ABOVE THE POINT THE PATCH IS TO BE INSERTED and ADDITIONALLY a MAXIMUM of TWO (2) lines BELOW THE POINT THE PATCH IS TO BE INSERTED for a total maximum of FOUR (4) LINES. THIS EXCEPTION ONLY APPLIES WHEN A PATCH IS "FUZZY" (NON-ABSOLUTE LINE NUMBER PLACEMENT) AND RELIES ON COVERED CODE TO DETERMINE PLACEMENT WITHIN A FILE.
+
+Where a COVERED USER develops a PATCH which complies with these license terms, a LIMITED EXCEPTION is granted for INCIDNDENTALLY INCLUDED COVERED CODE. INCINDENTALLY INCLUDED COVERED CODE is defined explicitly as ONE LINE OF COVERED CODE which the COVERED PATCH must MODIFY, and such MODIFICATIONS must include changes OTHER THAN TYPOGRAPHICAL ERRORS OR WHITESPACE. This definition is EXPANDED to include ONE (1) line of COVERED ORIGINAL CODE which may be used to DETERMINE LOCATION AND PLACEMENT per FIVE (5) lines of PATCH CODE INCLUDING THE ONE (1) LINE OF COVERED ORIGINAL CODE.
+
+## LICENSE SURVIVAL CLAUSE
+This license SHALL SURVIVE THE DEATH OF THE AUTHOR limited to the STATUTORY LIMIT OF COPYRIGHT in the AUTHOR'S PRINCIPAL RESIDENCE at the time of their death. OWNERSHIP AND RIGHTS transfer EXPLICITLY AND SOLELY to the author's estate, including all rights of enforcement, action, modification of license, or sale or transfer of rights. TRANSFER of license to the author's estate shall toll COPYRIGHT as permitted or required by the laws of the country, state, province, or other governing body of the author's principal residence at time of death.
