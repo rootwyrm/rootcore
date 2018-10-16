@@ -26,6 +26,9 @@ get_hostname()
 	if [ -z ${hostname} ]; then
 		hostname=$(hostname -f)
 	fi
+	if [ ! -z ${override_hostname} ]; then
+		hostname=${override_hostname}
+	fi
 	## XXX: Needs some additional sanity checking for LB/jail use.
 }
 
