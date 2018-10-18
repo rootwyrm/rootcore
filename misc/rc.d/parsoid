@@ -1,0 +1,69 @@
+#!/bin/sh
+#
+# PROVIDE: parsoid
+# REQUIRE: LOGIN nginx
+# KEYWORD: shutdown
+
+# parsoid_enable="yes"
+
+. /etc/rc.subr
+
+name="parsoid"
+rcvar=parsoid_enable
+
+# Read settings, set default values
+load_rc_config ${name}
+
+: ${parsoid_enable:=NO}
+: ${parsoid_pid=/var/run/parsoid/parsoid.pid}
+: ${parsoid_user=parsoid}
+: ${parsoid_group=parsoid}
+: ${parsoid_workdir=/opt/parsoid}
+: ${parsoid_args:="-c ${parsoid_workdir}/config.yaml"}
+
+# Can also be -9 etc. -HUP usually will only cause sadness.
+sig_stop=-KILL
+
+start_cmd=parsoid_start
+stop_cmd=parsoid_kill
+start_precmd=parsoid_precmd
+
+# Set to either 'node' to use default or set EXPLICIT!
+# e.g. '/usr/local/bin/node1.10'
+command_interpreter="node"
+# Command path must ALWAYS be explicit.
+command="${parsoid_workdir}/parsoid/bin/server.js"
+# Contain arguments in quotes, use ' and \"
+command_args="${parsoid_args}"
+
+parsoid_precmd()
+{
+	local rundir=${parsoid_pid%/*}
+	if [ ! -d $rundir ]; then
+		install -d -m 0755 -o ${parsoid_user} -g ${parsoid_group} $rundir
+	fi
+}
+
+parsoid_start()
+{
+	# See daemon(8) for more details.
+	daemon -f -P $parsoid_pid $command_interpreter $command $command_args
+	## This is the alternate method for older parsoid installs
+	#app_root="${parsoid_workdir}/parsoid/api"
+	#nginx_user="${nginx_user}
+	#daemon -P $parsoid_pid -c $app_root -f -r -u ${nginx_user} $command_interpreter $command $command_args
+	if [ $? -ne 0 ]; then
+		RC=$?
+		echo "Error starting Parsoid."
+		exit $RC
+	fi
+	echo "Starting Parsoid."
+}
+
+parsoid_kill()
+{
+	echo "Stopping Parsoid."
+	kill $sig_stop `cat $parsoid_pid`
+}
+
+run_rc_command "$1"
