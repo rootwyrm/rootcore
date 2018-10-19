@@ -32,7 +32,7 @@ start_precmd=parsoid_precmd
 # e.g. '/usr/local/bin/node1.10'
 command_interpreter="node"
 # Command path must ALWAYS be explicit.
-command="${parsoid_workdir}/parsoid/bin/server.js"
+command="${parsoid_workdir}/bin/server.js"
 # Contain arguments in quotes, use ' and \"
 command_args="${parsoid_args}"
 
@@ -47,7 +47,7 @@ parsoid_precmd()
 parsoid_start()
 {
 	# See daemon(8) for more details.
-	daemon -f -P $parsoid_pid $command_interpreter $command $command_args
+	daemon -f -p $parsoid_pid $command_interpreter $command $command_args
 	## This is the alternate method for older parsoid installs
 	#app_root="${parsoid_workdir}/parsoid/api"
 	#nginx_user="${nginx_user}
