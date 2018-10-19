@@ -18,7 +18,7 @@ load_rc_config ${name}
 : ${parsoid_pid=/var/run/parsoid/parsoid.pid}
 : ${parsoid_user=parsoid}
 : ${parsoid_group=parsoid}
-: ${parsoid_workdir=/opt/parsoid}
+: ${parsoid_workdir=/opt/parsoid/parsoid}
 : ${parsoid_args:="-c ${parsoid_workdir}/config.yaml"}
 
 # Can also be -9 etc. -HUP usually will only cause sadness.
