@@ -5,6 +5,7 @@
 
 . /etc/rc.subr
 . /etc/network.subr
+. /var/db/acme/hooks/postfix.conf
 
 log()
 {
@@ -20,10 +21,11 @@ log()
 
 get_hostname()
 {
-	if [ -z ${hostname} ]; then
+	if [ ! -z ${override_hostname} ]; then
+		hostname=${override_hostname}
+	elif [ -z ${hostname} ]; then
 		hostname=$(hostname -f)
 	fi
-	## XXX: Needs some additional sanity checking for LB/jail use.
 }
 
 ## XXX: Needs to be named this way.
@@ -36,6 +38,7 @@ renew_postfix()
 	fi
 	if [ ! -d /var/db/acme/certs/${hostname} ]; then
 		log "[ERROR] /var/db/acme/certs/${hostname} does not exist."
+		exit 1
 	fi
 
 	local src=/var/db/acme/certs/${hostname}
@@ -46,13 +49,13 @@ renew_postfix()
 		log "[ERROR] Unable to copy $src/*.cer to $dst/"
 		exit 1
 	fi
-	log "[postfix] Copied new certificate to $dst"
+	log "Copied new certificate to $dst"
 	cp -f $src/*.key $dst/
 	if [ $? -ne 0 ]; then
 		log "[ERROR] Unable to copy $src/*.key to $dst/"
 		exit 1
 	fi
-	log "[postfix] Copied new key to $dst"
+	log "Copied new key to $dst"
 
 	## Restart, not reload.
 	service postfix restart
@@ -60,6 +63,6 @@ renew_postfix()
 		log "[ERROR] Failed to restart postfix."
 		exit 1
 	fi
-	log "Restarted service successfully."
+	log "Restarted successfully."
 }
 
