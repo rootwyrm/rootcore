@@ -5,6 +5,7 @@
 
 . /etc/rc.subr
 . /etc/network.subr
+. /var/db/acme/hooks/mysql.conf
 
 log()
 {
@@ -15,27 +16,28 @@ log()
 		fi
 		touch $logfile
 	fi
-	echo $(date) [mysql] $1 | tee -a $logfile
+	echo "$(date) [mysql] $1" | tee -a $logfile
 }
 
 get_hostname()
 {
-	if [ -z ${hostname} ]; then
-		hostname=$(hostname -f)
-	fi
 	if [ ! -z ${override_hostname} ]; then
 		hostname=${override_hostname}
+	elif [ -z ${hostname} ]; then
+		hostname=$(hostname -f)
 	fi
-	## XXX: Needs some additional sanity checking for LB/jail use.
 }
 
 ## XXX: Needs to be named this way.
 ## XXX: Doesn't support profiles yet. :(
 renew_mysql()
 {
-	if [ ! -d ${mysql_dbdir} ]; then
-		log "[ERROR] Unable to determine mysql_dbdir directory."
-		exit 1
+	if [ -z ${mysql_dbdir} ]; then
+		log "[ERROR] mysql_dbdir is unset!"
+		exit 255
+	elif [ ! -d ${mysql_dbdir} ]; then
+		log "[ERROR] mysql_dbdir directory ${mysql_dbdir} does not exist."
+		exit 255
 	fi
 	## XXX: Doesn't support profiles yet.
 	if [ ! -d /var/db/acme/certs/${hostname} ]; then
@@ -44,26 +46,22 @@ renew_mysql()
 	fi
 	
 	local src=/var/db/acme/certs/${hostname}
-	local mysql_dst=${mysql_dbdir}
 	
-	if [ ! -d $mysql_dst ]; then
-		log "[ERROR] mysql_dbdir ${mysql_dbdir} does not exist!"
-	fi
-
-	/bin/cp -f $src/*.cer $mysql_dst/
+	/bin/cp -f $src/*.cer $mysql_dbdir/
 	if [ $? -ne 0 ]; then
-		log "[ERROR] Unable to copy ${src}/*.cer to ${mysql_dst}/"
+		log "[ERROR] Unable to copy ${src}/*.cer to ${mysql_dbdir}/"
 		exit 1
 	fi
-	log "Copied new certificate to $mysql_dst"
-	/bin/cp -f $src/*.key $mysql_dst/
+	log "Copied new certificate to $mysql_dbdir"
+	/bin/cp -f $src/*.key $mysql_dbdir/
 	if [ $? -ne 0 ]; then
-		log "[ERROR] Unable to copy ${src}/*.key to ${mysql_dst}/"
+		log "[ERROR] Unable to copy ${src}/*.key to ${mysql_dbdir}/"
 		exit 1
 	fi
-	log "Copied new key to $mysql_dst"
+	log "Copied new key to $mysql_dbdir"
 	## Fix permissions.
-	/usr/sbin/chown -R ${mysql_user}:${mysql_user} $dst/*
+	/usr/sbin/chown -R ${mysql_user}:${mysql_group} ${mysql_dbdir}/*cer
+	/usr/sbin/chown -R ${mysql_user}:${mysql_group} ${mysql_dbdir}/*key
 
 	service mysql-server restart
 	if [ $? -ne 0 ]; then

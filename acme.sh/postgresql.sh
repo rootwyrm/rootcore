@@ -8,6 +8,7 @@
 
 . /etc/rc.subr
 . /etc/network.subr
+. /var/db/acme/hooks/postgresql.conf
 
 log()
 {
@@ -23,21 +24,22 @@ log()
 
 get_hostname()
 {
-	if [ -z ${hostname} ]; then
-		hostname=$(hostname -f)
-	fi
 	if [ ! -z ${override_hostname} ]; then
 		hostname=${override_hostname}
+	elif [ -z ${hostname} ]; then
+		hostname=$(hostname -f)
 	fi
-	## XXX: Needs some additional sanity checking for LB/jail use.
 }
 
 ## XXX: Needs to be named this way.
 renew_postgresql()
 {
-	if [ ! -d ${postgresql_data} ]; then
+	if [ -z ${postgresql_data} ]; then
 		log "[ERROR] Unable to determine postgresql_data directory."
-		exit 1
+		exit 255
+	elif [ ! -d ${postgresql_data} ]; then
+		log "[ERROR] PostgreSQL data directory ${postgresql_data} does not exist!"
+		exit 255
 	fi
 	## XXX: Doesn't support profiles yet.
 	if [ ! -d /var/db/acme/certs/${hostname} ]; then
@@ -70,7 +72,7 @@ renew_postgresql()
 		log "[ERROR] Unable to copy ${src}/*.cer to ${pgs_dst}/"
 		exit 1
 	fi
-	log "[postgresql] Copied new certificate to $pgs_dst"
+	log "Copied new certificate to $pgs_dst"
 	/bin/cp -f $src/*.key $pgs_dst/
 	if [ $? -ne 0 ]; then
 		log "[ERROR] Unable to copy ${src}/*.key to ${pgs_dst}/"
@@ -78,9 +80,15 @@ renew_postgresql()
 	fi
 	log "Copied new key to $pgs_dst"
 	## Fix permissions.
-	/usr/sbin/chown -R postgres:postgres $dst/*
+	/usr/sbin/chown -R postgres:postgres ${pgs_dst}/*
+	/bin/chmod 0600 ${pgs_dst}/*cer
+	/bin/chmod 0600 ${pgs_dst}/*key
 
 	## Now handle the client certificate or replication won't use SSL.
+	if [ ! -d $PGHOME/.postgresql ]; then
+		log "[ERROR] $PGHOME/.postgresql does not exist!"
+		exit 1
+	fi
 	/bin/cp -f $src/${hostname}.cer ${pgc_crt}
 	if [ $? -ne 0 ]; then
 		log "[ERROR] Unable to copy ${src}/${hostname}.cer to ${pgc_crt}"
@@ -102,6 +110,8 @@ renew_postgresql()
 		log "[ERROR] Unable to set permissions on ${pgc_key}"
 		exit 1
 	fi
+	/bin/chmod 0600 ${pgc_crt}
+	/bin/chmod 0600 ${pgc_key}
 
 	service postgresql restart
 	if [ $? -ne 0 ]; then
