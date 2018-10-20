@@ -66,3 +66,5 @@ renew_postfix()
 	log "Restarted successfully."
 }
 
+get_hostname
+renew_postfix
