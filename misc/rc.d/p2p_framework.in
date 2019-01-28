@@ -1,0 +1,102 @@
+#!/bin/sh
+#
+# $FreeBSD$
+#
+# PROVIDE: sample
+# REQUIRE: DAEMON NETWORKING SERVERS samba_server nslcd kstart
+# KEYWORD: shutdown
+#
+# ... readme goes here ...
+
+. /etc/rc.subr
+
+name="sample"
+rcvar=sample_enable
+
+load_rc_config $name
+
+${sample_enable="NO"}
+${sample_user=sample}
+${sample_group=sample}
+${sample_chown="YES"}
+${sample_conf_dir="${HOME}/conf"}
+${sample_download_dir="${HOME}/Downloads"}
+${sample_logfile="${HOME}/logfile"}
+
+command=%%PREFIX%%/bin/${name}
+#command_interprerer=%%PYTHON_CMD%%
+command_args="--daemon" 
+
+pidfile=/var/run/${name}/pid
+
+start_precmd=sample_prestart
+stop_postcmd=${name}_poststop
+
+#sample_flags=" \
+#	${sample_conf_dir:+--profile=${sample_conf_dir}} \
+#	${sample_download_dir:+--save-path=${sample_download_dir}} \
+#	${sample_flags}"
+
+sample_sanity()
+{
+	if [ -z ${sample_user} ]; then
+		## || [ $sample_user = 'root' ]; then
+		## Do not start without an explicitly defined user.
+		echo "Refusing to start: set sample_user in rc.conf or rc.conf.d"
+		exit 1
+	fi
+	if [ -z $HOME ] || [ ! -d $HOME ]; then
+		## Do not create the home directory - violates POLA badly.
+		echo "Could not locate ${sample_user} home directory."
+		exit 1
+	fi
+}
+
+sample_prestart()
+{
+	sample_sanity
+	if checkyesno sample_chown; then
+		if [ ! -d $sample_conf_dir ]; then
+			mkdir -p $sample_conf_dir
+			chown -R $sample_user:$sample_group $sample_conf_dir
+		else
+			chown -R $sample_user:$sample_group $sample_conf_dir
+		fi
+		if [ ! -d $sample_download_dir ]; then
+			mkdir -p $sample_download_dir
+			chown -R $sample_user:$sample_group $sample_conf_dir
+		else
+			chown -R $sample_user:$sample_group $sample_conf_dir
+		fi
+	fi
+	## Create pidfile
+	if [ ! -d /var/run/${name} ]; then
+		if [ -e "/var/run/${name}" ]; then
+			unlink /var/run/${name}
+		fi
+		mkdir -p /var/run/${name}
+	fi
+	chmod 0755 /var/run/${name}
+	chown -R $sample_user /var/run/${name}
+}
+
+sample_poststop()
+{
+	[ -e "$pidfile" ] && unlink $pidfile
+	[ -d "${pidfile%/pid}" ] && rmdir ${pidfile%/pid}
+
+	[ -e "$sample_logfile" -a ! -s "$sample_logfile" ] &&
+		unlink $sample_logfile
+}
+
+#sample_start()
+#{
+#	daemon wrapper if necessary...
+#}
+
+#sample_stop()
+#{
+#	...
+#}
+
+run_rc_command "$1"
