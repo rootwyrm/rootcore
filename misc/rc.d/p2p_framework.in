@@ -15,13 +15,13 @@ rcvar=sample_enable
 
 load_rc_config $name
 
-${sample_enable="NO"}
-${sample_user=sample}
-${sample_group=sample}
-${sample_chown="YES"}
-${sample_conf_dir="${HOME}/conf"}
-${sample_download_dir="${HOME}/Downloads"}
-${sample_logfile="${HOME}/logfile"}
+: ${sample_enable="NO"}
+: ${sample_user=sample}
+: ${sample_group=sample}
+: ${sample_chown="YES"}
+: ${sample_conf_dir="${HOME}/conf"}
+: ${sample_download_dir="${HOME}/Downloads"}
+: ${sample_logfile="${HOME}/logfile"}
 
 command=%%PREFIX%%/bin/${name}
 #command_interprerer=%%PYTHON_CMD%%
