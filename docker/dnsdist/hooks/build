@@ -13,15 +13,15 @@ export LS_URL="https://github.com/rootwyrm/rootcore"
 docker build \
 	-t $IMAGE_NAME .
 	--build-arg RW_BLDHASH=$RW_BLDHASH \
-	--build-arg RW_VCSHASH=$
-	#--build-arg RW_VCSBRANCH=`git rev-parse --abbrev-ref HEAD` \
-	#--build-arg LS_VCSREF=`git rev-parse --short HEAD` \
-	#--build-arg LS_BLDDATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
-	--build-arg LS_VENDOR="RootWyrm.com" \
+	--build-arg RW_VCSHASH=$RW_VCSHASH \
+	--build-arg LS_VENDOR="RootWyrm.com" 
 	#--build-arg LS_SCHEMA=$LS_SCHEMA \
 	#--build-arg LS_SCHEMAVERSION=$LS_SCHEMAVERSION \
 	#--build-arg LS_NAME=$LS_NAME \
 	#--build-arg LS_URL=$LS_URL \
+	#--build-arg RW_VCSBRANCH=`git rev-parse --abbrev-ref HEAD` \
+	#--build-arg LS_VCSREF=`git rev-parse --short HEAD` \
+	#--build-arg LS_BLDDATE=`date -u +"%Y-%m-%dT%H:%M:%SZ"` \
 	
 ## NYI
 #	--build-arg LS_VERSION=`./get_version.sh` \
