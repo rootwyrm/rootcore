@@ -7,5 +7,5 @@ export LS_BLDDATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 ## Set defaults if null.
 [ -n "$LS_SCHEMA" ]			|| LS_SCHEMA="http://label-schema.org/rc1"
 [ -n "$LS_SCHEMAVERSION" ]	|| LS_SCHEMAVERSION="1.0.0-rc.1"
-[ -n "$LS_NAME" ]			|| LS_NAME="tc_docker"
-[ -n "$LS_URL" ]			|| LS_URL="https://github.com/rootwyrm/tc_docker"
+[ -n "$LS_NAME" ]			|| LS_NAME="dnsdist"
+[ -n "$LS_URL" ]			|| LS_URL="https://github.com/rootwyrm/rootcore"
