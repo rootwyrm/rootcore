@@ -30,4 +30,4 @@ RUN	echo "Updating apt..." ; apt-get -q -y update > /dev/null 2>&1 && \
 	apt-get clean && \
 	rm -rf /var/lib/apt/lists/*_dists_*
 
-CMD	[ "sh", "-c", "update-binfmts --enable && dpkg-reconfigure qemu-user-static" ]
+CMD	[ "sh", "-c", "update-binfmts --enable" ]
