@@ -1,4 +1,4 @@
-ARGS	QEMU=${QEMU:-5.1.0}
+ARG		QEMU=${QEMU:-5.1.0}
 FROM	ubuntu:focal
 
 LABEL	maintainer="Phillip 'RootWyrm' Jaenke <prj@rootwyrm.com>" \
