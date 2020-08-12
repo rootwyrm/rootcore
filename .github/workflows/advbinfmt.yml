@@ -1,0 +1,42 @@
+################################################################################
+## Workflow for docker.io/rootwyrm/advbinfmt
+## It takes entirely too long for this to build on Docker Hub.
+################################################################################
+
+name: (Docker) advbinfmt
+on:
+  push:
+    paths:
+      - 'docker/advbinfmt/**'
+  pull_request:
+    paths:
+      - 'docker/advbinfmt/**'
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        version: [ "4.2.1", "5.1.0" ]
+    name: Build advbinfmt - ${{ github.ref }}
+    runs-on: ubuntu-latest
+    env:
+      QEMU: ${{ matrix.version }}
+    steps:
+    - name: Check out from ${{ github.ref }}
+      id: checkout
+      uses: actions/checkout@v2
+      with:
+        submodules: true
+    - name: Build and push advbinfmt:${{ matrix.version }}
+      uses: docker/build-push-action@v1.1.0
+      with:
+        username: ${{ secrets.HUB_USER }}
+        password: ${{ secrets.HUB_TOKEN }}
+        repository: rootwyrm/advbinfmt
+        tags: ${{ matrix.version }}
+        path: docker/advbinfmt
+        always_pull: true
+        add_git_labels: true
+
+
+# vim:ft=yaml:sw=2:ts=2:et
