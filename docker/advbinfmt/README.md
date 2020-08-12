@@ -4,6 +4,10 @@ This is a 'more advanced' binfmt solution for Docker buildx. Where by 'more adva
 
 As a result, it generally tends to be faster. This is not a bad thing.
 
+Like it? Love it? Saved your project? Show me some love. 
+* [Sponsor on GitHub](https://github.com/sponsors/rootwyrm)
+* [Sponsor on Patreon](https://www.patreon.com/rootwyrm)
+
 # Using it for your buildx
 It's really simple. Pick a version from the list below.
 
