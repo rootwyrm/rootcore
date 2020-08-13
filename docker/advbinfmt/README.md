@@ -8,6 +8,8 @@ Like it? Love it? Saved your project? Show me some love.
 * [Sponsor on GitHub](https://github.com/sponsors/rootwyrm)
 * [Sponsor on Patreon](https://www.patreon.com/rootwyrm)
 
+![(Docker) advbinfmt](https://github.com/rootwyrm/rootcore/workflows/(Docker)%20advbinfmt/badge.svg?branch=master)![Docker Pulls](https://img.shields.io/docker/pulls/rootwyrm/advbinfmt)![Docker Image Size (tag)](https://img.shields.io/docker/image-size/rootwyrm/advbinfmt/4.2.1?label=4.2.1&style=flat-square)![Docker Image Size (tag)](https://img.shields.io/docker/image-size/rootwyrm/advbinfmt/5.1.0?label=5.1.0&style=flat-square)
+
 # Using it for your buildx
 It's really simple. Pick a version from the list below.
 
