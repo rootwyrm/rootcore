@@ -1,0 +1,32 @@
+language: shell
+os: linux
+dist: bionic
+services:
+- docker
+arch:
+- amd64
+branches:
+  only:
+  - master
+  - head
+env:
+  matrix:
+  - QEMU="4.2.1"
+  - QEMU="5.1.0"
+  global:
+  - secure: oHXRJ5QegYKjONdAaDNLXTf/lIS/y5xP000umofZ0lXN3G/2ebZ+ZfPS2iZH84akjbShgu/hycS/F99hD3xcuGwd60tTK+UPOyK3wcIyIs++YvJqdW8c3pcZ23h3vVthYn/ND9jcvUi7ykVz0z2swW0n7advjrHmr7XbKQo0ONXQfPFp7PX+YfbfuGP2c87HAfPIhZh+atjJkA2GElR3p3MTd9GwiZwzN8zVOmLmQgqFgcpcpAismXdvcvO8DNaspVpZ7u6vG8m6PDFBs9pqJW6IcPXVVibXy2xvfnN3uTlWyLkHgxtpAoJrCAGWJ1ZeZgFH42nxxdfSsd1UDjdtmrnHs9SgzINO4Q78gPBUVVp87yaJGFF/miRRfSzs9WqDFAS6dTvVgJiJTqsqdBqp2sieh0M9W3YuqWX6W7n2Ah+MksdXdwk131zoWGPDYcKT2++JlvCFVVf+1R9wmab75n/GBn3Ty+RHXALCn1g+L6fV8cfJWMXezU4Fv0cZdWH4vL/JcJwjfbpzuMB8jdZGqjCXgrwGfraLCoxg0JRJd6lZc6xtzqjywnq0M2U2CylSSY+5nmmRYTwwdoHs+EGfeNuzCgLRn1pCbOse1XnaqW1KhUPcMt4IWAY7LVzuA16Reb20m8FWQRZi4aUx+FlJXaqW3LskVm4jmO/WekqZfP4=
+  - secure: UpCnkO6LZlOEsVS+aHL/cczzDDGYu7rpvm6WIbjuVeQ5FUkCtcmYgREcBjfCc1xAxqalvkisXCduYjkSbsL0BUrv73QrHsOP/poftbQQ7AF163J8nimVIWo/Len3rce28aDoZEck6lJO3wI5anEiWVbsCEClr7+COrJDBHLE5mguctD47ll4ldMj5CFKE0FzUtFfGS8hGq7ffzitRs1RNCfdlGG7xKOGvRWnu5n9vVPThYgh1cYjYQrlexUa4D54NMOFCPTogwd+mQij5Lqn5/ldxDHqYWNV8+elmMwhWRq4vxSZBey6vR7CnGZewmMBijdx0p7tur8u/gLhxkGD28grl/W0AZJIipBUEZL8+o78RBqTA2pVzfzsLLtHzEIu9KrAjUSDVKuu1he6aRFL7BQ+c6B0+qMzBQOgdjZJgFNh8j9cPyhAcwUleKU+465bog7tq4u5oE1x42vq3sR1Y316gQQveGzdrmCtQIZC/OwkGoWbBafR7Eiy0w34WjEgXMpIr9s/Ayi4u3uW926EgBb4gTiG2fGJ8UQblDyVGaW9r06xd8jsb3elXaOrfiT/So3ySpdKB7hJOt0ZGlxH75q/e3N6WupVZg3DdhTvaqlcu6rmVKtdCbqeT6mLBaytmJt4GXJ22CbVOmU6rPfhjKm1OcTsfUZTC2Kjd2pDUFk=
+before_install:
+- curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+- sudo apt-add-repository "deb https://download.docker.com/linux/ubuntu $(lsb_release
+  -cs) stable"
+- sudo apt-get update
+- sudo apt-get -y -o Dpkg::Options="--force-confnew" install docker-ce
+jobs:
+  include:
+  - stage: Build Docker image
+    script:
+    - docker build -t advbinfmt:${QEMU} docker/advbinfmt
+    - docker login -u="$HUB_USER" -p="$HUB_TOKEN"
+    - docker tag advbinfmt:${QEMU} $HUB_USER/advbinfmt:${QEMU}
+    - docker push $HUB_USER/advbinfmt:${QEMU}
