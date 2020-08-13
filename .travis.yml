@@ -24,14 +24,14 @@ jobs:
   - 
   - script:
     - export QEMU="4.2.1"
-    - docker build -t advbinfmt:${QEMU} docker/advbinfmt
+    - docker build -t advbinfmt:${QEMU} --build-arg QEMU=${QEMU} docker/advbinfmt
     - docker login -u="$HUB_USER" -p="$HUB_TOKEN"
     - docker tag advbinfmt:${QEMU} $HUB_USER/advbinfmt:${QEMU}
     - docker push $HUB_USER/advbinfmt:${QEMU}
   - 
   - script:
     - export QEMU="5.1.0"
-    - docker build -t advbinfmt:${QEMU} docker/advbinfmt
+    - docker build -t advbinfmt:${QEMU} --build-arg QEMU=${QEMU} docker/advbinfmt
     - docker login -u="$HUB_USER" -p="$HUB_TOKEN"
     - docker tag advbinfmt:${QEMU} $HUB_USER/advbinfmt:${QEMU}
     - docker push $HUB_USER/advbinfmt:${QEMU}
