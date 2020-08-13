@@ -16,6 +16,7 @@ LABEL	maintainer="Phillip 'RootWyrm' Jaenke <prj@rootwyrm.com>" \
 RUN	export DEBIAN_FRONTEND=noninteractive && \
 	echo "Updating apt..." ; apt-get -q -y update > /dev/null 2>&1 && \
 	echo "Upgrading base..." ; apt-get -q -y upgrade > /dev/null 2>&1 && \
+	apt-get -q -y install binfmt-support > /dev/null 2>&1 && \
 	## autolearn packages
 	dpkg --get-selections | awk '{print $1}' > /pkg.base && \
 	echo "Installing build packages..." ; \
