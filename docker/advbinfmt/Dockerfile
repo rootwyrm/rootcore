@@ -1,9 +1,13 @@
 FROM	ubuntu:focal
 ARG		QEMU=${QEMU:-5.1.0}
+ENV		QEMU=${QEMU:-5.1.0}
 
 LABEL	maintainer="Phillip 'RootWyrm' Jaenke <prj@rootwyrm.com>" \
 		com.rootwyrm.project="advbinfmt" \
 		com.rootwyrm.vcs-type="github" \
+		com.rootwyrm.url="https://github.com/rootwyrm/rootcore" \
+		com.rootwyrm.software="qemu" \
+		com.rootwyrm.software.version="$QEMU" \
         ## OCI
         org.opencontainers.image.authors="RootWyrm" \
         org.opencontainers.image.vendor="RootWyrm" \
@@ -17,11 +21,12 @@ RUN	export DEBIAN_FRONTEND=noninteractive && \
 	echo "Installing build packages..." ; \
 	apt-get -q -y install apt-utils > /dev/null 2>&1 && \
 	dpkg-reconfigure debconf -f noninteractive ; \
+	apt-get -q -y remove gcc-10-base > /dev/null 2>&1 ; \
 	apt-get -q -y install libglib2.0-dev libfdt-dev libpixman-1-dev zlib1g-dev clang make wget > /dev/null 2>&1 && \
 	echo "Done installing build packages..." ; \
 	dpkg --get-selections | awk '{print $1}' > /pkg.build && \
 	## Need to configure tzdata
-	ln -fs /usr/share/zoneinfon/UTC /etc/localtime ; \
+	ln -fs /usr/share/zoneinfo/UTC /etc/localtime ; \
 	dpkg-reconfigure -f noninteractive tzdata ; \
 	echo "Downloading qemu..." ; \
 	cd /root ; wget https://download.qemu.org/qemu-${QEMU}.tar.xz && \
@@ -32,9 +37,17 @@ RUN	export DEBIAN_FRONTEND=noninteractive && \
 	make && \
 	make install && \
 	cd /root && \
-	diff -U /pkg.build /pkg.base | grep '^-' > /root/pkg.remove && \
+	rm -rf qemu* && \
+	diff -u /pkg.build /pkg.base > /root/pkg.remove && \
 	rm /pkg.base /pkg.build && \
-	apt-get purge `cat /root/pkg.remove | sed -e 's/^-//g'` && \
+	## Now bake the pkg.remove file...
+	sed -i -e '/^\@\@/d' /root/pkg.remove ; \
+	sed -i -e '/^\-\-\-/d' /root/pkg.remove ; \
+	sed -i -e '/^\+\+\+/d' /root/pkg.remove ; \
+	sed -i -e '/ /d' /root/pkg.remove ; \
+	echo "Purging unneeded packages..." ; \
+	apt-get purge -q -y `cat /root/pkg.remove | sed -e 's/^-//g'` && \
+	apt-get autoremove -y && \
 	rm /root/pkg.remove && \
 	apt-get clean && \
 	rm -rf /var/lib/apt/lists/*_dists_*
