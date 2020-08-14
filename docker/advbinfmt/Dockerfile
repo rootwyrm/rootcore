@@ -34,7 +34,7 @@ RUN	export DEBIAN_FRONTEND=noninteractive && \
 	tar xf qemu-${QEMU}.tar.xz && \
 	cd qemu-${QEMU} && \
 	echo "Building qemu..." ; \
-	./configure --enable-linux-user --enable-pie && \
+	./configure --prefix=/ --enable-linux-user --enable-pie && \
 	make && \
 	make install && \
 	cd /root && \
