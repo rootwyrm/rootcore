@@ -69,8 +69,8 @@ RUN	export DEBIAN_FRONTEND=noninteractive && \
 	make install && \
 	cp scripts/qemu-binfmt-conf.sh /root/qemu-binfmt-conf.sh && \
 	cd /root && \
-	rm -rf qemu* && \
-	chmod +x qemu-binfmt-conf.sh && \
+	rm -rf qemu-${QEMU} && \
+	chmod +x /root/qemu-binfmt-conf.sh && \
 	/root/qemu-binfmt-conf.sh --debian --persistent yes && \
 	diff -u /pkg.build /pkg.base > /root/pkg.remove && \
 	rm /pkg.base /pkg.build && \
