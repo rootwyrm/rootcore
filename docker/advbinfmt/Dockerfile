@@ -22,8 +22,10 @@ RUN	export DEBIAN_FRONTEND=noninteractive && \
 	echo "Installing build packages..." ; \
 	apt-get -q -y install apt-utils > /dev/null 2>&1 && \
 	dpkg-reconfigure debconf -f noninteractive ; \
-	apt-get -q -y remove gcc-10-base > /dev/null 2>&1 ; \
-	apt-get -q -y install libglib2.0-dev libfdt-dev libpixman-1-dev zlib1g-dev clang make wget > /dev/null 2>&1 && \
+	apt-get -q -y install \
+		libglib2.0-dev libfdt-dev libpixman-1-dev zlib1g-dev \
+		build-essential libtool pkg-config wget \
+		python3 > /dev/null 2>&1 && \
 	echo "Done installing build packages..." ; \
 	dpkg --get-selections | awk '{print $1}' > /pkg.build && \
 	## Need to configure tzdata
@@ -34,8 +36,36 @@ RUN	export DEBIAN_FRONTEND=noninteractive && \
 	tar xf qemu-${QEMU}.tar.xz && \
 	cd qemu-${QEMU} && \
 	echo "Building qemu..." ; \
-	./configure --prefix=/ --enable-linux-user --enable-pie && \
-	make && \
+	./configure \
+	--prefix=/ \
+	--with-pkgversion=${QEMU} \
+	--enable-linux-user \
+	--disable-system \
+	--static \
+	--disable-blobs \
+	--disable-bluez \
+	--disable-brlapi \
+	--disable-cap-ng \
+	--disable-capstone \
+	--disable-curl \
+	--disable-curses \
+	--disable-docs \
+	--disable-gcrypt \
+	--disable-gnutls \
+	--disable-gtk \
+	--disable-guest-agent \
+	--disable-guest-agent-msi \
+	--disable-libiscsi \
+	--disable-libnfs \
+	--disable-mpath \
+	--disable-nettle \
+	--disable-opengl \
+	--disable-sdl \
+	--disable-spice \
+	--disable-tools \
+	--disable-vte \
+	--enable-pie && \
+	make -j "$(getconf _NPROCESSORS_ONLN)" && \
 	make install && \
 	cd /root && \
 	rm -rf qemu* && \
