@@ -63,8 +63,7 @@ RUN	export DEBIAN_FRONTEND=noninteractive && \
 	--disable-sdl \
 	--disable-spice \
 	--disable-tools \
-	--disable-vte \
-	--enable-pie && \
+	--disable-vte && \
 	make -j "$(getconf _NPROCESSORS_ONLN)" && \
 	make install && \
 	cd /root && \
