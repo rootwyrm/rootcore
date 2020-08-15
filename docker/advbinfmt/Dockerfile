@@ -42,7 +42,6 @@ RUN	export DEBIAN_FRONTEND=noninteractive && \
 	--enable-linux-user \
 	--disable-system \
 	--static \
-	--disable-avx512f \
 	--disable-blobs \
 	--disable-brlapi \
 	--disable-cap-ng \
