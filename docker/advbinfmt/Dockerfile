@@ -24,8 +24,8 @@ RUN	export DEBIAN_FRONTEND=noninteractive && \
 	dpkg-reconfigure debconf -f noninteractive ; \
 	apt-get -q -y install \
 		libglib2.0-dev libfdt-dev libpixman-1-dev zlib1g-dev \
-		build-essential libtool pkg-config wget \
-		python3 > /dev/null 2>&1 && \
+		build-essential libtool pkg-config libc-dev-bin wget \
+		python3 libc6-dev > /dev/null 2>&1 && \
 	echo "Done installing build packages..." ; \
 	dpkg --get-selections | awk '{print $1}' > /pkg.build && \
 	## Need to configure tzdata
@@ -63,11 +63,15 @@ RUN	export DEBIAN_FRONTEND=noninteractive && \
 	--disable-spice \
 	--disable-tools \
 	--disable-virglrenderer \
-	--disable-vte && \
+	--disable-vte \
+	--target-list="aarch64-linux-user arm-linux-user ppc64le-linux-user ppc64-linux-user s390x-linux-user riscv64-linux-user" && \
 	make -j "$(getconf _NPROCESSORS_ONLN)" && \
 	make install && \
+	cp scripts/qemu-binfmt-conf.sh /root/qemu-binfmt-conf.sh && \
 	cd /root && \
 	rm -rf qemu* && \
+	chmod +x qemu-binfmt-conf.sh && \
+	/root/qemu-binfmt-conf.sh --debian --persistent yes && \
 	diff -u /pkg.build /pkg.base > /root/pkg.remove && \
 	rm /pkg.base /pkg.build && \
 	## Now bake the pkg.remove file...
