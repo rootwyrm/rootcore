@@ -42,8 +42,8 @@ RUN	export DEBIAN_FRONTEND=noninteractive && \
 	--enable-linux-user \
 	--disable-system \
 	--static \
+	--disable-avx512f \
 	--disable-blobs \
-	--disable-bluez \
 	--disable-brlapi \
 	--disable-cap-ng \
 	--disable-capstone \
@@ -63,6 +63,7 @@ RUN	export DEBIAN_FRONTEND=noninteractive && \
 	--disable-sdl \
 	--disable-spice \
 	--disable-tools \
+	--disable-virglrenderer \
 	--disable-vte && \
 	make -j "$(getconf _NPROCESSORS_ONLN)" && \
 	make install && \
