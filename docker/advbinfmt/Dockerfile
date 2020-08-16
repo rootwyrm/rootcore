@@ -13,6 +13,7 @@ LABEL   maintainer="Phillip 'RootWyrm' Jaenke <prj@rootwyrm.com>" \
         org.opencontainers.image.vendor="RootWyrm" \
         org.opencontainers.image.licenses="BSD-3-Clause"
 
+COPY [ "binfmt_update.sh", "/root/binfmt_update.sh" ]
 RUN	export DEBIAN_FRONTEND=noninteractive && \
 	echo "Updating apt..." ; apt-get -q -y update > /dev/null 2>&1 && \
 	echo "Upgrading base..." ; apt-get -q -y upgrade > /dev/null 2>&1 && \
@@ -88,5 +89,4 @@ RUN	export DEBIAN_FRONTEND=noninteractive && \
 	apt-get clean && \
 	rm -rf /var/lib/apt/lists/*_dists_*
 
-#CMD	[ "/bin/bash", "-c", "update-binfmts --importdir /usr/share/binfmts --import" ]
-CMD	[ "/bin/bash", "-c", "/root/qemu-binfmt-conf.sh" ]
+CMD	[ "/root/binfmt_update.sh" ]
