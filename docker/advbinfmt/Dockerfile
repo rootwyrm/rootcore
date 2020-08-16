@@ -39,7 +39,6 @@ RUN	export DEBIAN_FRONTEND=noninteractive && \
 	cd qemu-${QEMU} && \
 	echo "Building qemu..." ; \
 	./configure \
-    --prefix=/usr \
     --with-pkgversion=${QEMU} \
     --enable-user \
     --enable-linux-user \
@@ -68,13 +67,13 @@ RUN	export DEBIAN_FRONTEND=noninteractive && \
     --disable-spice \
     --disable-tools \
     --disable-vte \
-    --target-list="aarch64-linux-user arm-linux-user ppc64-linux-user ppc64le-linux-user s390x-linux-user riscv64-linux-user" && \
+    --target-list="aarch64-linux-user arm-linux-user mips64-linux-user mips64el-linux-user ppc64-linux-user ppc64le-linux-user s390x-linux-user riscv64-linux-user" && \
 	make -j "$(getconf _NPROCESSORS_ONLN)" && \
 	make install && \
     cp /root/qemu-${QEMU}/scripts/qemu-binfmt-conf.sh /root/ && \
 	cd /root && \
 	rm -rf qemu-${QEMU}* && \
-    /root/qemu-binfmt-conf.sh --debian --qemu-path=/usr/bin && \
+    /root/qemu-binfmt-conf.sh --debian && \
 	diff -u /pkg.build /pkg.base > /root/pkg.remove && \
 	rm /pkg.base /pkg.build && \
 	## Now bake the pkg.remove file...
@@ -89,4 +88,5 @@ RUN	export DEBIAN_FRONTEND=noninteractive && \
 	apt-get clean && \
 	rm -rf /var/lib/apt/lists/*_dists_*
 
-CMD	[ "/bin/bash", "-c", "update-binfmts --importdir /usr/share/binfmts --import" ]
+#CMD	[ "/bin/bash", "-c", "update-binfmts --importdir /usr/share/binfmts --import" ]
+CMD	[ "/bin/bash", "-c", "/root/qemu-binfmt-conf.sh" ]
