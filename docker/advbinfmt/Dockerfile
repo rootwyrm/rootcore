@@ -1,13 +1,13 @@
-FROM	ubuntu:focal
+FROM	debian:buster-slim
 ARG		QEMU=${QEMU:-5.1.0}
 ENV		QEMU=${QEMU:-5.1.0}
 
-LABEL	maintainer="Phillip 'RootWyrm' Jaenke <prj@rootwyrm.com>" \
-		com.rootwyrm.project="advbinfmt" \
-		com.rootwyrm.vcs-type="github" \
-		com.rootwyrm.url="https://github.com/rootwyrm/rootcore" \
-		com.rootwyrm.software="qemu" \
-		com.rootwyrm.software.version="$QEMU" \
+LABEL   maintainer="Phillip 'RootWyrm' Jaenke <prj@rootwyrm.com>" \
+        com.rootwyrm.project="advbinfmt" \
+        com.rootwyrm.vcs-type="github" \
+        com.rootwyrm.url="https://github.com/rootwyrm/rootcore" \
+        com.rootwyrm.software="qemu" \
+        com.rootwyrm.software.version="$QEMU" \
         ## OCI
         org.opencontainers.image.authors="RootWyrm" \
         org.opencontainers.image.vendor="RootWyrm" \
@@ -22,56 +22,59 @@ RUN	export DEBIAN_FRONTEND=noninteractive && \
 	echo "Installing build packages..." ; \
 	apt-get -q -y install apt-utils > /dev/null 2>&1 && \
 	dpkg-reconfigure debconf -f noninteractive ; \
-	apt-get -q -y install \
-		libglib2.0-dev libfdt-dev libpixman-1-dev zlib1g-dev \
-		build-essential libtool pkg-config libc-dev-bin wget \
-		python3 libc6-dev > /dev/null 2>&1 && \
+    apt-get -q -y install \
+    build-essential \
+    git \
+    libtool \
+    libpixman-1-dev \
+    libglib2.0-dev \
+    python3 \
+    wget && \
 	echo "Done installing build packages..." ; \
 	dpkg --get-selections | awk '{print $1}' > /pkg.build && \
 	## Need to configure tzdata
-	ln -fs /usr/share/zoneinfo/UTC /etc/localtime ; \
-	dpkg-reconfigure -f noninteractive tzdata ; \
 	echo "Downloading qemu..." ; \
 	cd /root ; wget https://download.qemu.org/qemu-${QEMU}.tar.xz && \
 	tar xf qemu-${QEMU}.tar.xz && \
 	cd qemu-${QEMU} && \
 	echo "Building qemu..." ; \
 	./configure \
-	--prefix=/ \
-	--with-pkgversion=${QEMU} \
-	--enable-linux-user \
-	--disable-system \
-	--static \
-	--disable-blobs \
-	--disable-brlapi \
-	--disable-cap-ng \
-	--disable-capstone \
-	--disable-curl \
-	--disable-curses \
-	--disable-docs \
-	--disable-gcrypt \
-	--disable-gnutls \
-	--disable-gtk \
-	--disable-guest-agent \
-	--disable-guest-agent-msi \
-	--disable-libiscsi \
-	--disable-libnfs \
-	--disable-mpath \
-	--disable-nettle \
-	--disable-opengl \
-	--disable-sdl \
-	--disable-spice \
-	--disable-tools \
-	--disable-virglrenderer \
-	--disable-vte \
-	--target-list="aarch64-linux-user arm-linux-user ppc64le-linux-user ppc64-linux-user s390x-linux-user riscv64-linux-user" && \
+    --prefix=/usr \
+    --with-pkgversion=${QEMU} \
+    --enable-user \
+    --enable-linux-user \
+    --disable-system \
+    --disable-bsd-user \
+    --disable-guest-agent \
+    --disable-guest-agent-msi \
+    --disable-pie \
+    --disable-gnutls \
+    --disable-nettle \
+    --disable-gcrypt \
+    --disable-blobs \
+    --disable-brlapi \
+    --disable-cap-ng \
+    --disable-capstone \
+    --disable-curl \
+    --disable-docs \
+    --disable-gtk \
+    --disable-libiscsi \
+    --disable-libnfs \
+    --disable-mpath \
+    --disable-opengl \
+    --disable-iconv \
+    --disable-virglrenderer \
+    --disable-sdl \
+    --disable-spice \
+    --disable-tools \
+    --disable-vte \
+    --target-list="aarch64-linux-user arm-linux-user ppc64-linux-user ppc64le-linux-user s390x-linux-user riscv64-linux-user" && \
 	make -j "$(getconf _NPROCESSORS_ONLN)" && \
 	make install && \
-	cp scripts/qemu-binfmt-conf.sh /root/qemu-binfmt-conf.sh && \
+    cp /root/qemu-${QEMU}/scripts/qemu-binfmt-conf.sh /root/ && \
 	cd /root && \
-	rm -rf qemu-${QEMU} && \
-	chmod +x /root/qemu-binfmt-conf.sh && \
-	/root/qemu-binfmt-conf.sh --debian --persistent yes && \
+	rm -rf qemu-${QEMU}* && \
+    /root/qemu-binfmt-conf.sh --debian && \
 	diff -u /pkg.build /pkg.base > /root/pkg.remove && \
 	rm /pkg.base /pkg.build && \
 	## Now bake the pkg.remove file...
@@ -86,4 +89,4 @@ RUN	export DEBIAN_FRONTEND=noninteractive && \
 	apt-get clean && \
 	rm -rf /var/lib/apt/lists/*_dists_*
 
-CMD	[ "sh", "-c", "update-binfmts --enable" ]
+CMD	[ "/bin/bash", "-c", "update-binfmts --importdir /usr/share/binfmts --import" ]
