@@ -74,7 +74,7 @@ RUN	export DEBIAN_FRONTEND=noninteractive && \
     cp /root/qemu-${QEMU}/scripts/qemu-binfmt-conf.sh /root/ && \
 	cd /root && \
 	rm -rf qemu-${QEMU}* && \
-    /root/qemu-binfmt-conf.sh --debian && \
+    /root/qemu-binfmt-conf.sh --debian --qemu-path=/usr/bin && \
 	diff -u /pkg.build /pkg.base > /root/pkg.remove && \
 	rm /pkg.base /pkg.build && \
 	## Now bake the pkg.remove file...
