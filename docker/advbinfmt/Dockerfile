@@ -91,7 +91,7 @@ RUN	export DEBIAN_FRONTEND=noninteractive && \
 	#apt-get clean && \
 	#rm -rf /var/lib/apt/lists/*_dists_*
 
-FROM linuxkit/alpine:v0.8 AS mirror
+FROM linuxkit/alpine:e2391e0b164c57db9f6c4ae110ee84f766edc430 AS mirror
 RUN	apk add --no-cache go musl-dev
 ENV GOPATH=/go PATH=$PATH:/go/bin
 
