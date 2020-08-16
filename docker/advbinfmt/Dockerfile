@@ -1,4 +1,4 @@
-FROM	debian:buster-slim
+FROM	debian:buster-slim AS qemu-user
 ARG		QEMU=${QEMU:-5.1.0}
 ENV		QEMU=${QEMU:-5.1.0}
 
@@ -40,6 +40,7 @@ RUN	export DEBIAN_FRONTEND=noninteractive && \
 	cd qemu-${QEMU} && \
 	echo "Building qemu..." ; \
 	./configure \
+	--prefix=/usr \
     --with-pkgversion=${QEMU} \
     --enable-user \
     --enable-linux-user \
@@ -73,20 +74,34 @@ RUN	export DEBIAN_FRONTEND=noninteractive && \
 	make install && \
     cp /root/qemu-${QEMU}/scripts/qemu-binfmt-conf.sh /root/ && \
 	cd /root && \
-	rm -rf qemu-${QEMU}* && \
-    /root/qemu-binfmt-conf.sh --debian && \
-	diff -u /pkg.build /pkg.base > /root/pkg.remove && \
-	rm /pkg.base /pkg.build && \
+	rm -rf qemu-${QEMU}* 
+	#&& \
+    #/root/qemu-binfmt-conf.sh --debian --qemu-path=/usr && \
+	#diff -u /pkg.build /pkg.base > /root/pkg.remove && \
+	#rm /pkg.base /pkg.build && \
 	## Now bake the pkg.remove file...
-	sed -i -e '/^\@\@/d' /root/pkg.remove ; \
-	sed -i -e '/^\-\-\-/d' /root/pkg.remove ; \
-	sed -i -e '/^\+\+\+/d' /root/pkg.remove ; \
-	sed -i -e '/ /d' /root/pkg.remove ; \
-	echo "Purging unneeded packages..." ; \
-	apt-get purge -q -y `cat /root/pkg.remove | sed -e 's/^-//g'` && \
-	apt-get autoremove -y && \
-	rm /root/pkg.remove && \
-	apt-get clean && \
-	rm -rf /var/lib/apt/lists/*_dists_*
+	#sed -i -e '/^\@\@/d' /root/pkg.remove ; \
+	#sed -i -e '/^\-\-\-/d' /root/pkg.remove ; \
+	#sed -i -e '/^\+\+\+/d' /root/pkg.remove ; \
+	#sed -i -e '/ /d' /root/pkg.remove ; \
+	#echo "Purging unneeded packages..." ; \
+	#apt-get purge -q -y `cat /root/pkg.remove | sed -e 's/^-//g'` && \
+	#apt-get autoremove -y && \
+	#rm /root/pkg.remove && \
+	#apt-get clean && \
+	#rm -rf /var/lib/apt/lists/*_dists_*
 
-CMD	[ "/root/binfmt_update.sh" ]
+FROM linuxkit/alpine:v0.8 AS mirror
+RUN	apk add --no-cache go musl-dev
+ENV GOPATH=/go PATH=$PATH:/go/bin
+
+COPY main.go /go/src/binfmt/
+RUN	go-compile.sh /go/src/binfmt
+
+FROM scratch
+ENTRYPOINT []
+WORKDIR /
+COPY --from=qemu-user usr/bin/qemu-* usr/bin/
+COPY --from=mirror /go/bin/binfmt usr/bin/binfmt
+COPY 00_linuxkit.conf etc/binfmt.d/00_linuxkit.conf
+CMD ["/usr/bin/binfmt"]
