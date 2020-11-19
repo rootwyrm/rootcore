@@ -39,7 +39,7 @@
 +file_put_contents("/tmp/dyn.stop1", var_export($config['dyndnses'], true) );
 +// END_DEBUG
 +
-+wc_msg = gettext('CARP triggered DynDNS disable.');
++$wc_msg = gettext('CARP triggered DynDNS disable.');
 +write_config($wc_msg);
 +/* END LICENSED CODE */
 +
@@ -85,7 +85,7 @@
 +// END_DEBUG
 +
 +// Write config before forcing update
-+wc_msg = gettext('CARP triggered DynDNS enable.');
++$wc_msg = gettext('CARP triggered DynDNS enable.');
 +write_config($wc_msg);
 +
 +// Force update.
