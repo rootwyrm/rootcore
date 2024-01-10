@@ -1,3 +1,3 @@
-# This is so alpha, it hurts.
+# No Longer Found Here
 
-Seriously. If you try to use this, it will hurt you.
+If you're looking for an SQL-based RPZ solution, it has been moved to Dragon North DNSecure / DNScaler
